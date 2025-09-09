@@ -13,6 +13,8 @@ enum Sound {
   voiceTooBright,
   voiceSunshine,
   sfxError,
+  blink,
+  eyeMove,
 }
 
 class SoundManager {
@@ -27,15 +29,17 @@ class SoundManager {
   final Map<Sound, String> _soundPaths = {
     Sound.blip: 'sounds/tap.mp3',
     Sound.voiceWakeup: 'sounds/voice_wakeup.mp3',
-    Sound.voiceSleep: 'sounds/sleep.mp3',
+    Sound.voiceSleep: 'sounds/voice_sleep.mp3',
     Sound.voiceGiggle: 'sounds/happy.mp3',
-    Sound.voiceThirsty: 'sounds/happy.mp3',
-    Sound.voiceHungry: 'sounds/happy.mp3',
-    Sound.voiceHot: 'sounds/happy.mp3',
-    Sound.voiceRootsDry: 'sounds/voice_rootsdry.mp3',
-    Sound.voiceTooBright: 'sounds/voice_toobright.mp3',
+    Sound.voiceThirsty: 'sounds/voice_thirsty.mp3',
+    Sound.voiceHungry: 'sounds/voice_hungry.mp3',
+    Sound.voiceHot: 'sounds/cooling.mp3',
+    Sound.voiceRootsDry: 'sounds/voice_thirsty.mp3',
+    Sound.voiceTooBright: 'sounds/panels.mp3',
     Sound.voiceSunshine: 'sounds/happy.mp3',
-    Sound.sfxError: 'sounds/error.mp3',
+    Sound.sfxError: 'sounds/con_lost.mp3',
+    Sound.blink: 'sounds/sfx_blink.mp3',
+    Sound.eyeMove: 'sounds/sfx_eye_move.mp3',
   };
   final String _dreamingLoopPath = 'sounds/dreaming_loop.mp3';
 

@@ -138,26 +138,26 @@ class DataOverlayScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _StatusCard(
-                        icon: status.ledStatus == 'ON'
-                            ? CupertinoIcons.sun_max_fill
-                            : CupertinoIcons.moon_stars_fill,
-                        title: 'Grow Light',
-                        value: status.ledStatus,
-                        unit: '',
-                        progress: status.ledStatus == 'ON' ? 1.0 : 0.0,
-                        progressColor: Colors.yellow,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    // This empty container ensures the 'Grow Light' card
-                    // maintains the same width as the cards above it.
-                    Expanded(child: Container()),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: _StatusCard(
+                //         icon: status.ledStatus == 'ON'
+                //             ? CupertinoIcons.sun_max_fill
+                //             : CupertinoIcons.moon_stars_fill,
+                //         title: 'Grow Light',
+                //         value: status.ledStatus,
+                //         unit: '',
+                //         progress: status.ledStatus == 'ON' ? 1.0 : 0.0,
+                //         progressColor: Colors.yellow,
+                //       ),
+                //     ),
+                //     const SizedBox(width: 16),
+                //     // This empty container ensures the 'Grow Light' card
+                //     // maintains the same width as the cards above it.
+                //     Expanded(child: Container()),
+                //   ],
+                // ),
               ],
             ),
           ),

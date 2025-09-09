@@ -299,11 +299,11 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
           children: [
             if (_currentMode == FaceDisplayMode.active)
               FadeTransition(
-                opacity: Tween<double>(begin: 0.6, end: 1.0).animate(_auraController),
+                opacity: Tween<double>(begin: 0.4, end: 1.0).animate(_auraController),
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 0, top: 0, bottom: 0, width: screenWidth * 0.3,
+                      left: 0, top: 0, bottom: 0, width: screenWidth * 0.1,
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -315,7 +315,7 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
                       ),
                     ),
                     Positioned(
-                      right: 0, top: 0, bottom: 0, width: screenWidth * 0.3,
+                      right: 0, top: 0, bottom: 0, width: screenWidth * 0.1,
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
