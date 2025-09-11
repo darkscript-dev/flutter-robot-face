@@ -1,14 +1,3 @@
-
-Absolutely. Here is the complete text.
-
-Copy everything inside the box below and paste it directly into your README.md file.
-
-code
-Markdown
-download
-content_copy
-expand_less
-
 # Flutter Robot Face Animator
 
 A highly performant and expressive animated robot face, built with Flutter's `CustomPainter`. This widget provides a set of lively, neon-style animations designed to run smoothly on a wide range of devices.
@@ -85,13 +74,6 @@ Mapping Data to an Emotion
 
 First, parse the JSON into a PodStatus model object. Then, use a logic function to determine the most important state to display. This function establishes the robot's personality by prioritizing certain conditions over others.
 
-code
-Dart
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
 // This function lives in pod_face_screen.dart
 PodEmotionalState _determineStateFromStatus(PodStatus status) {
   // Priority 1: Critical Warnings
@@ -109,6 +91,7 @@ PodEmotionalState _determineStateFromStatus(PodStatus status) {
   // Default: If everything is fine, the robot is happy
   return PodEmotionalState.happy;
 }
+
 State Reference Table
 Enum Value	Robot Expression	Trigger Condition (Example)
 sleeping	Sceptic (-- --)	ledStatus is OFF
@@ -121,10 +104,3 @@ thirstySoil	Tired	moisture reading is too high (dry)
 hidingFromLight	Denying (> <)	Cover angles are closed
 sunbathing	In Love (♥ ♥)	Cover angles are fully open
 disconnected	Broken (X X)	API connection fails
-code
-Code
-download
-content_copy
-expand_less
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
