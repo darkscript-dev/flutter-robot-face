@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// ADDED: Import the pod face screen to navigate back to it.
 import 'pod_face_screen.dart';
 
 class ClockScreen extends StatefulWidget {
@@ -34,17 +33,13 @@ class _ClockScreenState extends State<ClockScreen> {
     super.dispose();
   }
 
-  // --- NEW NAVIGATION LOGIC ---
-  /// Pushes a new PodFaceScreen and removes all previous screens.
-  /// This creates a "forward" slide animation, completing the loop.
   void _navigateToPodFaceAndResetStack(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => const PodFaceScreen(),
-        // This transition makes the PodFaceScreen slide in from the right.
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0); // Start off-screen to the right
-          const end = Offset.zero;       // End on-screen
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
           const curve = Curves.easeOutCubic;
           final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           final offsetAnimation = animation.drive(tween);
@@ -55,7 +50,6 @@ class _ClockScreenState extends State<ClockScreen> {
           );
         },
       ),
-      // This predicate is false for every route, so it removes them all.
           (Route<dynamic> route) => false,
     );
   }
@@ -70,11 +64,9 @@ class _ClockScreenState extends State<ClockScreen> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onHorizontalDragEnd: (details) {
-        // Swipe Left: Go forward to the PodFaceScreen
         if ((details.primaryVelocity ?? 0) < -100) {
-          _navigateToPodFaceAndResetStack(context); // Use the new method
+          _navigateToPodFaceAndResetStack(context);
         }
-        // Swipe Right: Go back to the DataOverlayScreen
         else if ((details.primaryVelocity ?? 0) > 100) {
           _navigateBack(context);
         }

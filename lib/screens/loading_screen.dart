@@ -12,12 +12,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    // Immediately check where to go next.
     _checkSavedIpAndNavigate();
   }
 
   void _checkSavedIpAndNavigate() async {
-    // Use a short delay to prevent screen flicker on fast startups
     await Future.delayed(const Duration(milliseconds: 50));
     await PodApi().initialize();
 
@@ -32,7 +30,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Show a simple loading indicator while navigating.
     return const Scaffold(
       backgroundColor: Colors.black,
       body: Center(

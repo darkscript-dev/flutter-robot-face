@@ -4,13 +4,9 @@ import '../api/pod_api.dart';
 import '../models/pod_status.dart';
 import '../services/sound_manager.dart';
 import '../widgets/animated_pod_face.dart';
-// REMOVED: No longer need DataOverlay directly here
-// import '../widgets/data_overlay.dart';
 import '../widgets/dreaming_particles.dart';
-// ADDED: Import the new screen
 import 'data_overlay_screen.dart';
 
-// Enum to manage the screen's primary display mode
 enum FaceDisplayMode { attract, waking, active }
 
 class PodFaceScreen extends StatefulWidget {
@@ -28,13 +24,9 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
   PodEmotionalState _currentFaceState = PodEmotionalState.sleeping;
   Timer? _statusUpdateTimer;
 
-  // Overlay Management
-  // REMOVED: The _showOverlay flag is no longer needed.
-  // bool _showOverlay = false;
   PodStatus? _currentStatus;
 
   bool _isDebugStateForced = false;
-  // Aura animation controller
   late AnimationController _auraController;
 
   @override
@@ -56,7 +48,6 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     super.dispose();
   }
 
-  // Helper function to get the correct color for the side auras
   Color _getAuraColor(PodEmotionalState state) {
     if (_currentMode != FaceDisplayMode.active) return Colors.transparent;
     switch (state) {
@@ -69,13 +60,11 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     }
   }
 
-  // Resets the timer that sends the app back to attract mode
   void _resetInactivityTimer() {
     _inactivityTimer?.cancel();
     _inactivityTimer = Timer(const Duration(seconds: 60), _enterAttractMode);
   }
 
-  // Enters the idle/screensaver mode
   void _enterAttractMode() {
     if (_isDebugStateForced) return;
     if (_currentMode == FaceDisplayMode.attract) return;
@@ -86,12 +75,9 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     setState(() {
       _currentMode = FaceDisplayMode.attract;
       _currentFaceState = PodEmotionalState.sleeping;
-      // REMOVED: No longer need to manage overlay state here
-      // _showOverlay = false;
     });
   }
 
-  // Plays the "Power On" animation and transitions to active mode
   void _startWakeUpSequence() async {
     if (_currentMode == FaceDisplayMode.active || (_currentMode == FaceDisplayMode.waking && _currentFaceState != PodEmotionalState.sleeping)) {
       _resetInactivityTimer();
@@ -116,14 +102,12 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     _resetInactivityTimer();
   }
 
-  // Starts the periodic fetching of the pod's status
   Future<void> _startStatusUpdates() async {
     await PodApi().initialize();
     _updateFace();
     _statusUpdateTimer = Timer.periodic(const Duration(seconds: 3), (_) => _updateFace());
   }
 
-  // Fetches status and updates the face state and data overlay
   Future<void> _updateFace() async {
     if (_isDebugStateForced) return;
     try {
@@ -175,7 +159,6 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     }
   }
 
-  // Logic engine to decide the face's emotion
   PodEmotionalState _determineStateFromStatus(PodStatus status) {
     if (status.waterLevel == 'LOW') return PodEmotionalState.thirsty;
     if (status.nutrientLevel == 'LOW') return PodEmotionalState.needsNutrients;
@@ -188,21 +171,17 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
     return PodEmotionalState.happy;
   }
 
-  // --- ADDED: Method to navigate to the data screen ---
   void _navigateToDataScreen() {
-    if (_currentStatus == null) return; // Don't navigate if there's no data
+    if (_currentStatus == null) return;
 
     Navigator.of(context).push(
-      // PageRouteBuilder allows for a custom transition animation.
       PageRouteBuilder(
-        // CHANGED: Opaque is now true to hide the face screen underneath.
         opaque: true,
         transitionDuration: const Duration(milliseconds: 400),
         pageBuilder: (context, animation, secondaryAnimation) {
           return DataOverlayScreen(status: _currentStatus!);
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          // This creates the slide-from-right animation.
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
           const curve = Curves.easeOutCubic;
@@ -277,7 +256,6 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
       backgroundColor: Colors.black,
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        // --- MODIFIED: onTap no longer toggles the overlay ---
         onTap: () {
           SoundManager().play(Sound.blip);
           if (_currentMode == FaceDisplayMode.attract) {
@@ -286,9 +264,7 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
             _resetInactivityTimer();
           }
         },
-        // --- ADDED: onHorizontalDragEnd to detect swipes ---
         onHorizontalDragEnd: (details) {
-          // A negative velocity indicates a swipe from right to left.
           if (_currentMode == FaceDisplayMode.active && (details.primaryVelocity ?? 0) < 0) {
             _resetInactivityTimer();
             _navigateToDataScreen();
@@ -349,7 +325,6 @@ class PodFaceScreenState extends State<PodFaceScreen> with TickerProviderStateMi
               ),
             */
 
-            // Hidden Corner Buttons (unchanged)
             Positioned(
               top: 0, left: 0,
               child: GestureDetector(

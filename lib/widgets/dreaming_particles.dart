@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-// Represents a single "firefly" particle
 class Particle {
   Offset position;
   Offset velocity;
@@ -33,7 +31,7 @@ class _DreamingParticlesState extends State<DreamingParticles>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 10), // A long duration for a slow animation
+      duration: const Duration(seconds: 10),
     )..repeat();
   }
 
@@ -44,7 +42,6 @@ class _DreamingParticlesState extends State<DreamingParticles>
   }
 
   void _initializeParticles() {
-    // Only create particles if the list is empty
     if (particles.isNotEmpty) return;
 
     final size = MediaQuery.of(context).size;
@@ -53,11 +50,11 @@ class _DreamingParticlesState extends State<DreamingParticles>
           Particle(
             Offset(random.nextDouble() * size.width, random.nextDouble() * size.height),
             Offset(
-              (random.nextDouble() - 0.5) * 20, // Slow random velocity x
-              (random.nextDouble() - 0.5) * 20, // Slow random velocity y
+              (random.nextDouble() - 0.5) * 20,
+              (random.nextDouble() - 0.5) * 20,
             ),
-            random.nextDouble() * 2.5 + 1.0, // Radius between 1.0 and 3.5
-            random.nextDouble() * 0.5 + 0.1, // Opacity between 0.1 and 0.6
+            random.nextDouble() * 2.5 + 1.0,
+            random.nextDouble() * 0.5 + 0.1,
           )
       );
     }
@@ -94,12 +91,9 @@ class _ParticlePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = Colors.cyan.withOpacity(0.8);
 
-    // Update and draw each particle
     for (var p in particles) {
-      // Update position based on velocity
-      p.position += p.velocity * (1 / 60); // Assuming 60fps update interval
+      p.position += p.velocity * (1 / 60);
 
-      // Boundary checks to wrap particles around the screen
       if (p.position.dx < 0) p.position = Offset(size.width, p.position.dy);
       if (p.position.dx > size.width) p.position = Offset(0, p.position.dy);
       if (p.position.dy < 0) p.position = Offset(p.position.dx, size.height);

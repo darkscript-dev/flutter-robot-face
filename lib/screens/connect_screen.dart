@@ -22,7 +22,6 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
   Future<void> _loadSavedUrl() async {
     final prefs = await SharedPreferences.getInstance();
-    // *** FIX: Use the correct key 'pod_url' to match the API service ***
     _urlController.text = prefs.getString('pod_url') ?? '';
     setState(() {
       _useMockData = prefs.getBool('use_mock_data') ?? false;
@@ -85,7 +84,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                   style: const TextStyle(fontSize: 18),
                   enabled: !_useMockData,
                   decoration: InputDecoration(
-                    hintText: 'e.g., https://name.ngrok.io', // Updated hint
+                    hintText: 'e.g., https://name.ngrok.io',
                     border: const OutlineInputBorder(),
                     fillColor: _useMockData ? Colors.grey[850] : Colors.grey[900],
                     filled: true,
@@ -100,9 +99,9 @@ class _ConnectScreenState extends State<ConnectScreen> {
 
                 Slider(
                   value: _faceSizeDivisor,
-                  min: 2.0,   // Max size (touches screen edges)
+                  min: 2.0,   // Max size
                   max: 4.0,   // Small size
-                  divisions: 20, // Allows for steps like 2.0, 2.1, 2.2 etc.
+                  divisions: 20,
                   label: _faceSizeDivisor.toStringAsFixed(1),
                   activeColor: Colors.amber,
                   inactiveColor: Colors.grey[800],
@@ -110,12 +109,11 @@ class _ConnectScreenState extends State<ConnectScreen> {
                     setState(() {
                       _faceSizeDivisor = newValue;
                     });
-                    // Save the new value immediately
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.setDouble('face_size_divisor', newValue);
                   },
                 ),
-                const SizedBox(height: 24), // Keep this space
+                const SizedBox(height: 24),
                 _isLoading
                     ? const CircularProgressIndicator()
                     : ElevatedButton(onPressed: _connectToPod, child: const Text('Connect & Save')),

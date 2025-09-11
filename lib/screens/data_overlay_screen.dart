@@ -32,16 +32,10 @@ class DataOverlayScreen extends StatelessWidget {
     );
   }
 
-  // --- Helper functions to normalize data for progress bars ---
-
-  // Normalizes moisture (e.g., 300 is wet, 1000 is dry)
   double _getMoistureProgress() {
-    // Invert the value so that higher moisture means a fuller bar.
-    // Clamping ensures the value stays between 0.0 and 1.0.
     return (1.0 - ((status.moisture - 300) / (1000 - 300))).clamp(0.0, 1.0);
   }
 
-  // Normalizes temperature (e.g., 15-35°C is the "normal" range)
   double _getTemperatureProgress() {
     return ((status.temperature - 15) / (35 - 15)).clamp(0.0, 1.0);
   }
@@ -81,7 +75,6 @@ class DataOverlayScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
 
-                // --- DATA ROWS ---
                 Row(
                   children: [
                     Expanded(
@@ -167,7 +160,6 @@ class DataOverlayScreen extends StatelessWidget {
   }
 }
 
-/// A reusable UI component for displaying a single piece of status data.
 class _StatusCard extends StatelessWidget {
   final IconData icon;
   final String title;

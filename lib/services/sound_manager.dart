@@ -1,6 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
 
-// NEW: A completely new, more descriptive enum for our sounds
 enum Sound {
   blip,
   voiceWakeup,
@@ -25,7 +24,6 @@ class SoundManager {
   late AudioPlayer _sfxPlayer;
   late AudioPlayer _loopingPlayer;
 
-  // NEW: Updated map with new filenames
   final Map<Sound, String> _soundPaths = {
     Sound.blip: 'sounds/tap.mp3',
     Sound.voiceWakeup: 'sounds/voice_wakeup.mp3',
@@ -57,7 +55,7 @@ class SoundManager {
 
   void startDreamingLoop() {
     _loopingPlayer.play(AssetSource(_dreamingLoopPath));
-    _loopingPlayer.setVolume(0.4); // Ambient should be subtle
+    _loopingPlayer.setVolume(0.4);
   }
 
   void stopDreamingLoop() {

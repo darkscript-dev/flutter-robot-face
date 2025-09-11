@@ -1,20 +1,16 @@
-// lib/models/pod_status.dart
-
-// NEW: Added all the new emotional states we will use.
 enum PodEmotionalState {
   sleeping,
   waking,
   happy,
-  thirsty,      // Main water tank is empty
+  thirsty,
   hot,
-  thirstySoil,  // Soil is dry, needs watering
+  thirstySoil,
   needsNutrients,
   hidingFromLight,
   sunbathing,
   disconnected,
 }
 
-// MODIFIED: The class now holds all the data from the Pod's /status JSON.
 class PodStatus {
   final String waterLevel;
   final String nutrientLevel;
@@ -36,7 +32,6 @@ class PodStatus {
     this.coverAngle3 = 60,
   });
 
-  // MODIFIED: The factory now parses all the fields from the JSON.
   factory PodStatus.fromJson(Map<String, dynamic> json) {
     return PodStatus(
       waterLevel: json['water_level'] ?? 'OK',

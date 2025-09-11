@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart'
 import '../models/pod_status.dart';
 import '../services/sound_manager.dart';
 
+//90% ai generated file
+
 class AnimatedPodFace extends StatefulWidget {
   final PodEmotionalState state;
   const AnimatedPodFace({required this.state, Key? key}) : super(key: key);

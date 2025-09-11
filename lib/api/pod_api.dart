@@ -1,5 +1,3 @@
-// lib/api/pod_api.dart
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -24,7 +22,6 @@ class PodApi {
   bool isConfigured() => _useMockData || (_podUrl != null && _podUrl!.isNotEmpty);
   bool isMockMode() => _useMockData;
 
-  // *** NEW: Define the ngrok header here ***
   Map<String, String> get _headers => {
     'ngrok-skip-browser-warning': 'true',
   };
@@ -55,7 +52,6 @@ class PodApi {
     final String statusUrl = '$baseUrl/status';
 
     try {
-      // *** FIX: Pass the header to the GET request ***
       final response = await http.get(Uri.parse(statusUrl), headers: _headers)
           .timeout(const Duration(seconds: 10));
 
@@ -87,7 +83,6 @@ class PodApi {
     final statusUrl = '$_podUrl/status';
 
     try {
-      // *** FIX: Pass the header to the GET request here as well ***
       final response = await http.get(Uri.parse(statusUrl), headers: _headers)
           .timeout(const Duration(seconds: 3));
 

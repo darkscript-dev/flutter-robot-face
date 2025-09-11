@@ -6,10 +6,9 @@ class DataOverlay extends StatelessWidget {
 
   const DataOverlay({Key? key, required this.status}) : super(key: key);
 
-  // Helper to create a consistent text style
   TextStyle _textStyle(double size, {bool isLabel = false}) {
     return TextStyle(
-      fontFamily: 'monospace', // Gives it a "techy" feel
+      fontFamily: 'monospace',
       fontSize: size,
       color: isLabel ? Colors.cyan.withOpacity(0.6) : Colors.cyan,
       shadows: [
@@ -21,7 +20,6 @@ class DataOverlay extends StatelessWidget {
     );
   }
 
-  // Helper to format a single data row
   Widget _buildDataRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -35,10 +33,7 @@ class DataOverlay extends StatelessWidget {
     );
   }
 
-  // Helper to convert raw moisture value to a percentage
   String _formatMoisture(int moisture) {
-    // Assuming a common sensor range of 0 (wet) to ~1023 (dry)
-    // We'll invert it so high % is more moist.
     if (moisture > 1023) moisture = 1023;
     final percentage = 100 - (moisture / 1023 * 100);
     return '${percentage.toStringAsFixed(0)}%';
@@ -71,8 +66,6 @@ class DataOverlay extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _buildDataRow('INTERNAL TEMP', '${status.temperature.toStringAsFixed(1)}°C'),
-          // NOTE: Ambient Humidity is not in the PodStatus model.
-          // Using moisture as a placeholder.
           _buildDataRow('SOIL MOISTURE', _formatMoisture(status.moisture)),
           _buildDataRow('LIGHT LEVELS', status.ledStatus),
           _buildDataRow('WATER RESERVOIR', status.waterLevel),
