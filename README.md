@@ -10,6 +10,17 @@ Instead of showing raw numbers, it uses a custom-animated vector face to display
 The complete PodPal project, including the main dashboard app and all hardware firmware, can be found here:
 **[https://github.com/darkscript-dev/PodPal](https://github.com/darkscript-dev/PodPal)** 
 
+<table>
+  <tr>
+    <td><img src="./screenshots/happy_face.png" alt="Happy State" width="250"/></td>
+    <td><img src="./screenshots/sun_bathing.png" alt="Thirsty State" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="./screenshots/hot_face.png" alt="Sleeping State" width="250"/></td>
+    <td><img src="./screenshots/screen_saver.png" alt="Disconnected State" width="250"/></td>
+  </tr>
+</table>
+
 ## Features
 
 *   **Real-time Emotional State:** Connects to the PodPal hardware over the local network to receive live sensor data.
